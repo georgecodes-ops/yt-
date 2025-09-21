@@ -1,0 +1,87 @@
+{
+  "timestamp": "2025-09-06 23:02:12",
+  "summary": {
+    "total_tests": 19,
+    "passed_tests": 13,
+    "failed_tests": 6,
+    "success_rate": 68.42105263157895
+  },
+  "detailed_results": {
+    "Main Virtual Environment": {
+      "passed": true,
+      "details": "Python 3.10.6"
+    },
+    "WAN Virtual Environment": {
+      "passed": false,
+      "details": "Python executable not found"
+    },
+    "PyTorch": {
+      "passed": true,
+      "details": "PyTorch 2.8.0+cpu - CUDA: False"
+    },
+    "Diffusers": {
+      "passed": true,
+      "details": "Diffusers 0.35.1"
+    },
+    "Transformers": {
+      "passed": true,
+      "details": "Transformers 4.56.1"
+    },
+    "Compatibility Check": {
+      "passed": false,
+      "details": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"C:\\Users\\gcall\\OneDrive\\Documents\\monay_restored\\src\\enhanced_main.py\", line 11, in <module>\n    from dotenv import load_dotenv\nModuleNotFoundError: No module named 'dotenv'\n"
+    },
+    "WAN Environment": {
+      "passed": false,
+      "details": "WAN venv not found"
+    },
+    "Ollama Installation": {
+      "passed": true,
+      "details": "ollama version is 0.11.10"
+    },
+    "Ollama Service": {
+      "passed": true,
+      "details": "Running with 2 models"
+    },
+    "Mistral Model Available": {
+      "passed": false,
+      "details": "No Mistral models found"
+    },
+    "Complete System Startup": {
+      "passed": false,
+      "details": "start_monay_complete.py not found"
+    },
+    "WAN Service Launcher": {
+      "passed": false,
+      "details": "start_wan_service.py not found"
+    },
+    "System Setup Script": {
+      "passed": true,
+      "details": "setup_complete_system.py exists"
+    },
+    "Requirements": {
+      "passed": true,
+      "details": "requirements.txt exists"
+    },
+    "Environment": {
+      "passed": true,
+      "details": ".env exists"
+    },
+    "Config YAML": {
+      "passed": true,
+      "details": "config.yaml exists"
+    },
+    "WAN PyProject": {
+      "passed": true,
+      "details": "src/wan/pyproject.toml exists"
+    },
+    "Enhanced Main": {
+      "passed": true,
+      "details": "src/enhanced_main.py exists"
+    },
+    "Data Bridge": {
+      "passed": true,
+      "details": "data_bridge.py exists"
+    }
+  }
+}

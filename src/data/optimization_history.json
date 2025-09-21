@@ -1,0 +1,101 @@
+[
+  {
+    "content_optimization": {
+      "content_optimized": true,
+      "trending_topics_integrated": 0,
+      "optimization_score": 70,
+      "trending_topics_found": 4
+    },
+    "ad_placement_updates": {
+      "ad_strategies_updated": 2,
+      "revenue_improvement": 0.3,
+      "placement_optimizations": 2,
+      "performance_score": 75
+    },
+    "thumbnail_testing": {
+      "test_started": true,
+      "variants_tested": 2,
+      "video_id": "default"
+    },
+    "retention_improvements": {
+      "fixes_applied": 4,
+      "strategies": [
+        {
+          "strategy": "hook_optimization",
+          "description": "Improved opening hooks for finance content",
+          "impact": "positive"
+        },
+        {
+          "strategy": "pattern_interrupts",
+          "description": "Added visual breaks every 30 seconds",
+          "impact": "positive"
+        },
+        {
+          "strategy": "neon_branding",
+          "description": "Applied consistent neon pixel art theme",
+          "impact": "positive"
+        },
+        {
+          "strategy": "engagement_triggers",
+          "description": "Added interactive elements and CTAs",
+          "impact": "positive"
+        }
+      ],
+      "expected_improvement": "15-25% retention increase"
+    },
+    "trending_integration": {
+      "trending_integrations": 3,
+      "topics": [
+        {
+          "trend": "AI automation in finance",
+          "integration_method": "content_adaptation",
+          "neon_theme": "applied",
+          "status": "integrated"
+        },
+        {
+          "trend": "Passive income strategies 2024",
+          "integration_method": "content_adaptation",
+          "neon_theme": "applied",
+          "status": "integrated"
+        },
+        {
+          "trend": "Cryptocurrency market analysis",
+          "integration_method": "content_adaptation",
+          "neon_theme": "applied",
+          "status": "integrated"
+        }
+      ],
+      "content_updated": true
+    },
+    "performance_analysis": {
+      "total_views": 1500,
+      "total_revenue": 25.5,
+      "engagement_rate": 0.045,
+      "subscriber_growth": 12,
+      "top_performing_videos": [
+        {
+          "title": "Finance Tips",
+          "views": 5000
+        }
+      ],
+      "performance_score": 78.5
+    },
+    "competitor_analysis": {
+      "top_performer": {
+        "name": "Crypto_King",
+        "avg_views": 120000,
+        "engagement": 0.052
+      },
+      "avg_engagement": 0.04499999999999999,
+      "content_gaps": [
+        "neon pixel art branding",
+        "anime-style finance education"
+      ],
+      "opportunities": [
+        "trending finance topics",
+        "interactive content"
+      ]
+    },
+    "timestamp": "2025-09-03T23:39:11.347373"
+  }
+]

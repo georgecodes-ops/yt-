@@ -1,0 +1,40 @@
+[Unit]
+Description=MonAY Finance Video System - BULLETPROOF VERSION
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=george
+Group=george
+WorkingDirectory=/opt/monay
+ExecStart=/opt/monay/venv/bin/python /opt/monay/src/enhanced_main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=monay
+
+# CRITICAL: Environment variables for bulletproof operation
+Environment="PYTHONPATH=/opt/monay/src:/opt/monay"
+Environment="WAN_CACHE_DIR=/opt/monay/.cache/wan"
+Environment="WAN_MODEL_DIR=/opt/monay/.cache/models"
+Environment="WAN_OUTPUT_DIR=/opt/monay/.cache/outputs"
+Environment="MPLCONFIGDIR=/opt/monay/.cache/matplotlib"
+Environment="WANAPITOKEN=local"
+Environment="USEFREETIER=true"
+Environment="WAN_TOKEN=local"
+Environment="CPU_LIMIT_PERCENT=60"
+Environment="STARTUP_DELAY_SECONDS=5"
+
+# Load .env file for additional variables
+EnvironmentFile=/opt/monay/.env
+
+# Security and resource limits
+PrivateTmp=true
+NoNewPrivileges=true
+MemoryMax=20G
+CPUQuota=80%
+
+[Install]
+WantedBy=multi-user.target
