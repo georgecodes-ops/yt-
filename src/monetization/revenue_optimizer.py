@@ -1,23 +1,55 @@
 """
-Revenue Optimizer - Maximizes monetization across all channels
+Modern Revenue Optimizer - 2024/2025 Monetization Strategies
+Implements latest YouTube monetization and multi-platform revenue optimization
 """
 
 import logging
 import asyncio
-from typing import Dict, List
+from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 
 class RevenueOptimizer:
-    """Optimizes revenue across all YouTube channels"""
+    """
+    Advanced revenue optimization system implementing 2024/2025 strategies
+    Features: Multi-platform monetization, affiliate optimization, course creation
+    """
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        
+        # Modern revenue streams based on 2024/2025 research
+        self.revenue_streams = {
+            'youtube_ads': {'priority': 3, 'cpm_target': 13.52},  # High CPM for finance
+            'affiliate_marketing': {'priority': 1, 'commission_target': 0.15},
+            'course_sales': {'priority': 1, 'price_target': 297},
+            'coaching': {'priority': 2, 'hourly_rate': 150},
+            'sponsorships': {'priority': 2, 'rate_per_1k': 25},
+            'email_list': {'priority': 1, 'value_per_subscriber': 1.5},
+            'membership': {'priority': 2, 'monthly_target': 47}
+        }
+        
+        # Finance niche optimization settings
+        self.finance_optimization = {
+            'high_value_keywords': [
+                'investing', 'retirement planning', 'passive income',
+                'real estate', 'cryptocurrency', 'financial freedom',
+                'wealth building', 'stock market', 'emergency fund'
+            ],
+            'monetization_triggers': [
+                'investment strategy', 'financial advice', 'money tips',
+                'wealth creation', 'income generation'
+            ]
+        }
+        
         self.optimization_strategies = {
             'ad_placement': self.optimize_ad_placement,
             'content_timing': self.optimize_content_timing,
             'audience_targeting': self.optimize_audience_targeting,
-            'monetization_features': self.optimize_monetization_features
+            'monetization_features': self.optimize_monetization_features,
+            'modern_revenue_optimization': self.optimize_revenue  # New modern method
         }
+        
+        self.logger.info("✅ Modern Revenue Optimizer initialized")
         
     async def optimize_all_channels(self):
         """Run optimization for all active channels"""
@@ -259,32 +291,47 @@ class RevenueOptimizer:
             'merchandise_enabled': False
         }
 
-    async def optimize_revenue(self, performance_data: Dict) -> Dict:
-        """Fixed revenue optimization with proper returns"""
+    async def optimize_revenue(self, content_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Modern revenue optimization using 2024/2025 strategies
+        Optimizes for multiple revenue streams and viral monetization
+        """
         try:
-            # Calculate revenue based on performance data
-            calculated_revenue = self._calculate_revenue_from_performance(performance_data)
-            revenue_breakdown = self._analyze_revenue_sources(performance_data)
-            suggestions = self._generate_optimization_suggestions(performance_data)
+            topic = content_data.get('topic', '')
+            script = content_data.get('script', '')
             
-            revenue_data = {
-                'total_revenue': calculated_revenue,
-                'revenue_sources': revenue_breakdown,
-                'optimization_suggestions': suggestions,
-                'performance_metrics': performance_data,
-                'optimized_at': datetime.now().isoformat(),
-                'status': 'optimized'
+            self.logger.info(f"💰 Optimizing revenue for: {topic}")
+            
+            # Analyze content for monetization potential
+            monetization_score = self._analyze_monetization_potential(topic, script)
+            
+            # Generate revenue optimization plan
+            revenue_plan = await self._generate_revenue_plan(topic, script, monetization_score)
+            
+            # Create affiliate recommendations
+            affiliate_recommendations = self._generate_affiliate_recommendations(topic)
+            
+            # Generate course/product ideas
+            product_ideas = self._generate_product_ideas(topic)
+            
+            # Calculate revenue projections
+            projections = self._calculate_revenue_projections(monetization_score)
+            
+            return {
+                'monetization_score': monetization_score,
+                'revenue_plan': revenue_plan,
+                'affiliate_recommendations': affiliate_recommendations,
+                'product_ideas': product_ideas,
+                'revenue_projections': projections,
+                'optimization_status': 'success',
+                'optimized_at': datetime.now().isoformat()
             }
-            
-            return revenue_data
             
         except Exception as e:
             self.logger.error(f"Revenue optimization failed: {e}")
             return {
-                'status': 'failed',
-                'error': str(e),
-                'fallback_revenue': 0.0,
-                'failed_at': datetime.now().isoformat()
+                'optimization_status': 'error',
+                'error': str(e)
             }
 
     def _calculate_revenue_from_performance(self, performance_data: Dict) -> float:
@@ -319,3 +366,203 @@ class RevenueOptimizer:
             suggestions.append("Optimize thumbnails and titles for better CTR")
         
         return suggestions
+    
+    def _analyze_monetization_potential(self, topic: str, script: str) -> float:
+        """Analyze content for monetization potential (0-1 scale)"""
+        score = 0.0
+        
+        # Check for high-value keywords
+        high_value_count = sum(1 for keyword in self.finance_optimization['high_value_keywords'] 
+                              if keyword.lower() in topic.lower() or keyword.lower() in script.lower())
+        score += min(high_value_count * 0.1, 0.4)
+        
+        # Check for monetization triggers
+        trigger_count = sum(1 for trigger in self.finance_optimization['monetization_triggers']
+                           if trigger.lower() in topic.lower() or trigger.lower() in script.lower())
+        score += min(trigger_count * 0.15, 0.3)
+        
+        # Length bonus (longer content = more monetization opportunities)
+        if len(script) > 500:
+            score += 0.1
+        if len(script) > 1000:
+            score += 0.1
+        
+        # Topic-specific bonuses
+        if any(term in topic.lower() for term in ['investing', 'passive income', 'wealth']):
+            score += 0.1
+        
+        return min(score, 1.0)
+    
+    async def _generate_revenue_plan(self, topic: str, script: str, score: float) -> Dict[str, Any]:
+        """Generate comprehensive revenue optimization plan"""
+        plan = {
+            'immediate_actions': [],
+            'short_term_goals': [],
+            'long_term_strategy': [],
+            'recommended_streams': []
+        }
+        
+        # Immediate actions based on content
+        if score > 0.7:
+            plan['immediate_actions'].extend([
+                'Add affiliate links in description',
+                'Create lead magnet for email capture',
+                'Include course promotion in video',
+                'Add high-value call-to-action'
+            ])
+        elif score > 0.4:
+            plan['immediate_actions'].extend([
+                'Optimize for YouTube ads',
+                'Add basic affiliate links',
+                'Include email signup'
+            ])
+        else:
+            plan['immediate_actions'].extend([
+                'Focus on subscriber growth',
+                'Build email list',
+                'Create engaging content'
+            ])
+        
+        # Short-term goals (1-3 months)
+        plan['short_term_goals'] = [
+            'Reach 1000 subscribers for monetization',
+            'Build email list to 500 subscribers',
+            'Create first digital product',
+            'Establish affiliate partnerships'
+        ]
+        
+        # Long-term strategy (6-12 months)
+        plan['long_term_strategy'] = [
+            'Launch comprehensive finance course',
+            'Develop coaching program',
+            'Create membership community',
+            'Build multiple income streams'
+        ]
+        
+        # Recommended revenue streams based on score
+        if score > 0.6:
+            plan['recommended_streams'] = ['affiliate_marketing', 'course_sales', 'coaching']
+        elif score > 0.3:
+            plan['recommended_streams'] = ['youtube_ads', 'affiliate_marketing', 'email_list']
+        else:
+            plan['recommended_streams'] = ['youtube_ads', 'email_list']
+        
+        return plan
+    
+    def _generate_affiliate_recommendations(self, topic: str) -> List[Dict[str, Any]]:
+        """Generate affiliate product recommendations based on topic"""
+        recommendations = []
+        
+        # Finance-specific affiliate products
+        if 'investing' in topic.lower():
+            recommendations.extend([
+                {
+                    'product': 'Investment Tracking Apps',
+                    'commission': '15-25%',
+                    'relevance': 'high',
+                    'placement': 'video description + pinned comment'
+                },
+                {
+                    'product': 'Financial Education Courses',
+                    'commission': '30-50%',
+                    'relevance': 'high',
+                    'placement': 'mid-video mention + description'
+                }
+            ])
+        
+        if 'emergency fund' in topic.lower():
+            recommendations.extend([
+                {
+                    'product': 'High-Yield Savings Accounts',
+                    'commission': '$50-200 per signup',
+                    'relevance': 'high',
+                    'placement': 'video description + end screen'
+                }
+            ])
+        
+        # General finance affiliates
+        recommendations.extend([
+            {
+                'product': 'Personal Finance Books',
+                'commission': '4-8%',
+                'relevance': 'medium',
+                'placement': 'description + community posts'
+            },
+            {
+                'product': 'Budgeting Software',
+                'commission': '20-40%',
+                'relevance': 'medium',
+                'placement': 'video mention + description'
+            }
+        ])
+        
+        return recommendations
+    
+    def _generate_product_ideas(self, topic: str) -> List[Dict[str, Any]]:
+        """Generate digital product ideas based on content topic"""
+        products = []
+        
+        if 'investing' in topic.lower():
+            products.extend([
+                {
+                    'type': 'course',
+                    'name': 'Complete Investing Masterclass',
+                    'price_range': '$197-$497',
+                    'development_time': '4-6 weeks'
+                },
+                {
+                    'type': 'ebook',
+                    'name': 'Investment Strategy Guide',
+                    'price_range': '$27-$47',
+                    'development_time': '1-2 weeks'
+                }
+            ])
+        
+        # Universal finance products
+        products.extend([
+            {
+                'type': 'coaching',
+                'name': '1-on-1 Financial Coaching',
+                'price_range': '$100-$200/hour',
+                'development_time': 'immediate'
+            },
+            {
+                'type': 'membership',
+                'name': 'MonAY Finance Community',
+                'price_range': '$27-$47/month',
+                'development_time': '2-3 weeks'
+            }
+        ])
+        
+        return products
+    
+    def _calculate_revenue_projections(self, monetization_score: float) -> Dict[str, Any]:
+        """Calculate revenue projections based on monetization score"""
+        base_multiplier = monetization_score
+        
+        projections = {
+            'monthly': {},
+            'yearly': {},
+            'growth_assumptions': {
+                'subscriber_growth': '20% monthly',
+                'conversion_rate': f'{monetization_score * 2:.1%}',
+                'average_order_value': f'${100 * monetization_score:.0f}'
+            }
+        }
+        
+        # Monthly projections
+        projections['monthly'] = {
+            'youtube_ads': int(1000 * base_multiplier * 13.52 / 1000),  # $13.52 CPM
+            'affiliate_commissions': int(500 * base_multiplier),
+            'course_sales': int(297 * base_multiplier * 5),  # 5 sales per month
+            'total_estimated': int((1000 * base_multiplier * 13.52 / 1000) + 
+                                 (500 * base_multiplier) + 
+                                 (297 * base_multiplier * 5))
+        }
+        
+        # Yearly projections
+        projections['yearly'] = {
+            stream: amount * 12 for stream, amount in projections['monthly'].items()
+        }
+        
+        return projections

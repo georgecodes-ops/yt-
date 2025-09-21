@@ -7,10 +7,15 @@ import tempfile
 import time
 
 class TTSGenerator:
-    """CPU-optimized Text-to-Speech generation"""
+    """
+    Modern TTS Generator with ElevenLabs integration
+    Implements 2024/2025 best practices for YouTube automation
+    """
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        
+        # Modern voice settings optimized for YouTube engagement
         self.voice_settings = {
             "voice": "en-US-AriaNeural",
             "rate": "+20%",  # Slightly faster for engagement
@@ -18,8 +23,87 @@ class TTSGenerator:
             "volume": "+0%"
         }
         
+        # ElevenLabs settings (if available)
+        self.elevenlabs_settings = {
+            "voice_id": "pqHfZKP75CvOlQylNhV4",  # Professional male voice
+            "model_id": "eleven_multilingual_v2",  # Best for consistency
+            "stability": 0.2,
+            "similarity_boost": 0.8,
+            "style": 0.0,
+            "use_speaker_boost": True
+        }
+        
         # Check available TTS engines
         self.tts_engine = self._detect_tts_engine()
+        self.elevenlabs_available = self._check_elevenlabs_availability()
+        
+    def _check_elevenlabs_availability(self) -> bool:
+        """Check if ElevenLabs is available and configured"""
+        try:
+            # Check for API key
+            api_key = os.getenv('ELEVENLABS_API_KEY')
+            if not api_key:
+                self.logger.info("⚠️ ElevenLabs API key not found")
+                return False
+            
+            # Try to import elevenlabs
+            import elevenlabs
+            self.logger.info("✅ ElevenLabs available with API key")
+            return True
+        except ImportError:
+            self.logger.info("⚠️ ElevenLabs package not installed")
+            return False
+        except Exception as e:
+            self.logger.warning(f"ElevenLabs check failed: {e}")
+            return False
+        
+    async def _generate_elevenlabs_tts(self, text: str, output_path: str) -> str:
+        """
+        Generate audio using ElevenLabs API
+        Implements 2024/2025 best practices for YouTube automation
+        """
+        try:
+            from elevenlabs.client import ElevenLabs
+            from elevenlabs import VoiceSettings
+            
+            # Initialize client
+            client = ElevenLabs(api_key=os.getenv('ELEVENLABS_API_KEY'))
+            
+            # Clean text for better TTS
+            clean_text = self._clean_text_for_tts(text)
+            
+            # Generate audio with optimized settings
+            audio_generator = client.text_to_speech.convert(
+                text=clean_text,
+                voice_id=self.elevenlabs_settings["voice_id"],
+                model_id=self.elevenlabs_settings["model_id"],
+                voice_settings=VoiceSettings(
+                    stability=self.elevenlabs_settings["stability"],
+                    similarity_boost=self.elevenlabs_settings["similarity_boost"],
+                    style=self.elevenlabs_settings["style"],
+                    use_speaker_boost=self.elevenlabs_settings["use_speaker_boost"]
+                ),
+                output_format="mp3_44100_128"  # High quality for YouTube
+            )
+            
+            # Save audio to file
+            with open(output_path.replace('.wav', '.mp3'), 'wb') as f:
+                for chunk in audio_generator:
+                    f.write(chunk)
+            
+            final_path = output_path.replace('.wav', '.mp3')
+            
+            # Validate output
+            if os.path.exists(final_path) and os.path.getsize(final_path) > 1000:
+                self.logger.info(f"✅ ElevenLabs TTS generated: {final_path}")
+                return final_path
+            else:
+                self.logger.error("ElevenLabs TTS output validation failed")
+                return None
+                
+        except Exception as e:
+            self.logger.error(f"ElevenLabs TTS generation failed: {e}")
+            return None
         
     def _detect_tts_engine(self) -> str:
         """Detect best available TTS engine for CPU using venv packages"""
@@ -66,7 +150,10 @@ class TTSGenerator:
                         return "none"
     
     async def generate_audio(self, text: str, output_path: Optional[str] = None) -> str:
-        """Generate audio with CPU optimization"""
+        """
+        Generate audio with modern TTS engines
+        Prioritizes ElevenLabs for best quality, falls back to other engines
+        """
         if not output_path:
             base_dir = "/opt/monay" if os.path.exists("/opt/monay") else "."
             output_path = f"{base_dir}/outputs/audio_{abs(hash(text)) % 10000}.wav"
@@ -75,6 +162,16 @@ class TTSGenerator:
         os.makedirs(f"{base_dir}/outputs", exist_ok=True)
         
         try:
+            # Priority 1: ElevenLabs (best quality for YouTube)
+            if self.elevenlabs_available:
+                self.logger.info("🎤 Using ElevenLabs TTS (premium quality)")
+                result = await self._generate_elevenlabs_tts(text, output_path)
+                if result and self._validate_audio_output(result):
+                    return result
+                else:
+                    self.logger.warning("ElevenLabs failed, falling back to other engines")
+            
+            # Priority 2: Edge TTS (good quality, free)
             if self.tts_engine == "edge-tts-venv":
                 result = await self._generate_edge_tts_venv(text, output_path)
             elif self.tts_engine == "edge-tts":
