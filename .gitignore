@@ -1,0 +1,21 @@
+﻿# Ignore everything by default
+*
+
+# But don't ignore these specific folders and files (whitelist)
+!.gitignore
+!README.md
+!src/
+!get_youtube_tokens.py
+!setup_system_deployment.py
+!config.yaml
+!monay_bulletproof.service
+!*.py
+
+# Exclude specific unwanted folders
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
